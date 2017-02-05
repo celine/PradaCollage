@@ -15,6 +15,10 @@ public class PhotoView extends ImageView implements BaseComponent {
 
 	public interface OnPhotoListener {
 		void onModifyPhoto(PhotoView view);
+
+		void onPushToBottom(PhotoView view);
+
+		void onBringToFront(PhotoView view);
 	}
 
 	@Override
@@ -56,6 +60,17 @@ public class PhotoView extends ImageView implements BaseComponent {
 
 		@Override
 		public boolean onDown(MotionEvent e) {
+			return true;
+		}
+
+		@Override
+		public void onLongPress(MotionEvent e) {
+			listener.onPushToBottom(PhotoView.this);
+		}
+
+		@Override
+		public boolean onSingleTapConfirmed(MotionEvent e) {
+			listener.onBringToFront(PhotoView.this);
 			return true;
 		}
 

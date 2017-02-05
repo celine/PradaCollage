@@ -20,6 +20,7 @@ public class LabelViewImpl extends BaseLabelView {
 	}
 
 	private void initLabelView() {
+		setBackgroundColor(Color.BLUE);
 		//Typeface tf = Typeface.create("Helvetica",Typeface.BOLD);
 		mTextPaint = new Paint();
 		mTextPaint.setTextSize(DEFAULT_FONT_SIZE);
