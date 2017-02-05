@@ -11,5 +11,6 @@
     <string name="progress_title">progressing ...</string>
     <string name="progress_message">Please wait a moment</string>
     <string name="has_stroke">Has Stroke</string>
+    <string name="user_denied">User denied</string>
 
 </resources>
