@@ -70,7 +70,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
-        sha1="7ed4d6ab25f8ec830ed718f41f6c3ac82c2cadd6">
+        sha1="78c86fe18a84a410245ddd644ef0e9e582cee02c">
         <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_b7d822c23872bc7f819db66990244b0c508a449b/classes.dex" />
     </item>
     <item
@@ -169,7 +169,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
-        sha1="b1e361458ba41939a1284f4a84921882fca3c3f6">
+        sha1="23cfdeb7379b87baa59e7ea746fc398dcf76abf8">
         <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_1472b49c77610ee864949f8f1407b8cc0e2d9b25/classes.dex" />
     </item>
     <item

@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.media.FaceDetector;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -62,6 +63,8 @@ public class GlassesDetector {
 			if (f != null) {
 				PointF midPoint = new PointF();
 				f.getMidPoint(midPoint);
+				Log.d("WTest","find face " + midPoint.toString());
+
 				float eyesdist = f.eyesDistance();
 				addGlasses((int) (midPoint.x - eyesdist / 2), (int) midPoint.y,
 						(int) (midPoint.x + eyesdist / 2), (int) midPoint.y,

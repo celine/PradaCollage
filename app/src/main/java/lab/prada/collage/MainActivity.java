@@ -1,5 +1,8 @@
 package lab.prada.collage;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -9,15 +12,23 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 
 import java.io.IOException;
@@ -218,8 +229,8 @@ public class MainActivity extends BaseActivity implements OnLabelListener, OnPho
                 GlassesDetector detector = new GlassesDetector(MainActivity.this,
                         (ViewGroup) findViewById(R.id.frame_sticks));
                 detector.detectFaces((ViewGroup) textPhotoPanel);
-				/*
-				 * showProgressDialog(false); } }).start();
+                /*
+                 * showProgressDialog(false); } }).start();
 				 */
                 return true;
             default:
@@ -273,8 +284,77 @@ public class MainActivity extends BaseActivity implements OnLabelListener, OnPho
     }
 
     @Override
-    public void onPushToBottom(PhotoView view) {
+    public void onPushToBottom(final PhotoView view) {
+        Rect rect = new Rect();
+        view.getGlobalVisibleRect(rect);
         int childCount = textPhotoPanel.getChildCount();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            List<Animator> animatorList = new ArrayList<>();
+            for (int i = 0; i < childCount; i++) {
+                View otherView = textPhotoPanel.getChildAt(i);
+                if (otherView != view) {
+                    addTranslateAnim(animatorList, otherView, view);
+                }
+            }
+
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    pushToBottom(view);
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+            animatorSet.playTogether(animatorList);
+            animatorSet.setDuration(500);
+            animatorSet.setInterpolator(new AnticipateOvershootInterpolator());
+            animatorSet.start();
+
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    private void addTranslateAnim(List<Animator> animators, View otherView, View current) {
+        float extra = 5;
+        float minOffset = 30;
+        float xDis = (current.getWidth() * current.getScaleX() + otherView.getWidth() * otherView.getScaleX()) / 2 + extra;
+        float yDis = (current.getHeight() * current.getScaleY() + otherView.getHeight() * otherView.getScaleY()) / 2 + extra;
+
+        if (Math.abs(current.getX() - otherView.getX()) >= xDis || Math.abs(current.getY() - otherView.getY()) >= yDis) {
+            return;
+        }
+        int xDir = otherView.getX() > current.getX() ? 1 : -1;
+        int yDir = otherView.getY() > current.getY() ? 1 : -1;
+        Log.d("WTest", "dir " + xDir + " " + yDir);
+        float newX = current.getX() + xDir * xDis;
+        float newY = current.getY() + yDir * yDis;
+        if (Math.abs(newX - current.getX()) > Math.abs(newY - current.getY())) {
+            newX = otherView.getX() + xDir * minOffset;
+        } else {
+            newY = otherView.getY() + yDir * minOffset;
+        }
+        animators.add(ObjectAnimator.ofFloat(otherView, View.X, newX, otherView.getX()));
+        animators.add(ObjectAnimator.ofFloat(otherView, View.Y, newY, otherView.getY()));
+
+    }
+
+    private void pushToBottom(PhotoView view) {
+        int childCount = textPhotoPanel.getChildCount();
+
         if (childCount > 0) {
             if (textPhotoPanel.getChildAt(0) != view) {
                 textPhotoPanel.removeView(view);
@@ -284,7 +364,42 @@ public class MainActivity extends BaseActivity implements OnLabelListener, OnPho
     }
 
     @Override
-    public void onBringToFront(PhotoView view) {
+    public void onBringToFront(final PhotoView view) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            AnimatorSet animationSet = new AnimatorSet();
+            float currentScaleX = view.getScaleX();
+            float currentScaleY = view.getScaleY();
+            float toScale = currentScaleX * 1.2f;
+            animationSet.playTogether(ObjectAnimator.ofFloat(view, View.SCALE_X, toScale, currentScaleX), ObjectAnimator.ofFloat(view, View.SCALE_Y, toScale, currentScaleY));
+            animationSet.setDuration(500);
+            animationSet.setInterpolator(new OvershootInterpolator());
+            animationSet.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    bringToFront(view);
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+            animationSet.start();
+        }
+
+    }
+
+    private void bringToFront(PhotoView view) {
         int childCount = textPhotoPanel.getChildCount();
         if (childCount > 0) {
             if (textPhotoPanel.getChildAt(childCount - 1) != view) {
