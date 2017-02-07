@@ -10,12 +10,18 @@ import java.util.Random;
  */
 public class CollageUtils {
     private static Random sRandom = new Random();
+
     public static List<ScrapTransform> generateScrapsTransform(int screenWidth, int screenHeight, int scrapNum) {
         List<ScrapTransform> trans = new ArrayList<>(scrapNum);
         for (int i = 0; i < scrapNum; i++) {
-            trans.add(new ScrapTransform(sRandom.nextInt(screenWidth / 2), sRandom.nextInt(screenHeight / 2), 0, 1));
+            float angle = (float) Math.toRadians(Math.random() * 360);
+            trans.add(new ScrapTransform(sRandom.nextInt(screenWidth / 2), sRandom.nextInt(screenHeight / 2), angle, 1));
         }
         return trans;
+    }
+
+    public static int getNewPos(float x, int range){
+        return (int) (x + sRandom.nextInt(range) - range / 2);
     }
 
     public static class ScrapTransform {
@@ -23,6 +29,7 @@ public class CollageUtils {
         public final int centerY;
         public final float rotation;
         public final float scale;
+
         public ScrapTransform(int x, int y, float r, float scale) {
             centerX = x;
             centerY = y;

@@ -11,8 +11,8 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,9 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnticipateOvershootInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 
@@ -36,20 +34,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import afzkl.development.mColorPicker.views.GeneralListener;
 import bolts.Continuation;
 import bolts.Task;
+import lab.prada.collage.component.BaseComponent;
 import lab.prada.collage.component.BaseLabelView;
-import lab.prada.collage.component.BaseLabelView.OnLabelListener;
 import lab.prada.collage.component.ComponentFactory;
+import lab.prada.collage.component.LabelViewImpl;
 import lab.prada.collage.component.PhotoView;
-import lab.prada.collage.component.PhotoView.OnPhotoListener;
 import lab.prada.collage.util.CameraImageHelper;
 import lab.prada.collage.util.CollageUtils;
 import lab.prada.collage.util.GlassesDetector;
 import lab.prada.collage.util.StoreImageHelper;
 import lab.prada.collage.util.StoreImageHelper.onSaveListener;
 
-public class MainActivity extends BaseActivity implements OnLabelListener, OnPhotoListener,
+public class MainActivity extends BaseActivity implements GeneralListener,
         View.OnClickListener {
 
     private static final int SELECT_PHOTO = 0;
@@ -60,6 +59,7 @@ public class MainActivity extends BaseActivity implements OnLabelListener, OnPho
     private ProgressDialog progressDialog;
     private ViewGroup allViews;
     private ViewGroup textPhotoPanel;
+    FrameLayout.LayoutParams defaultParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +99,9 @@ public class MainActivity extends BaseActivity implements OnLabelListener, OnPho
                 if (paths.isEmpty()) {
                     return;
                 }
-                List<CollageUtils.ScrapTransform> trans = CollageUtils.generateScrapsTransform(textPhotoPanel.getWidth(), textPhotoPanel.getHeight(), paths.size());
+                int width = getResources().getDisplayMetrics().widthPixels;
+                int height = getResources().getDisplayMetrics().heightPixels;
+                List<CollageUtils.ScrapTransform> trans = CollageUtils.generateScrapsTransform(width, height, paths.size());
                 clearImages();
                 int i = 0;
                 final int baseWidth = textPhotoPanel.getWidth() / 2;
@@ -124,7 +126,7 @@ public class MainActivity extends BaseActivity implements OnLabelListener, OnPho
                             ViewCompat.setScaleX(iv, scale);
                             ViewCompat.setScaleY(iv, scale);
                             iv.setImageBitmap(bitmap);
-                            iv.setXY(transform.centerX, transform.centerY);
+                            iv.setXY(transform.centerX-iv.getWidth()/2, transform.centerY-iv.getHeight()/2);
                             textPhotoPanel.addView(iv);
                             return iv;
                         }
@@ -192,7 +194,7 @@ public class MainActivity extends BaseActivity implements OnLabelListener, OnPho
         tv.setListener(this);
         tv.setXY(textPhotoPanel.getWidth() / 2, textPhotoPanel.getHeight() / 2);
         tv.setText(text, color, hasStroke);
-        textPhotoPanel.addView(tv.getView(), new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+        textPhotoPanel.addView(tv.getView());
     }
 
     @Override
@@ -242,16 +244,6 @@ public class MainActivity extends BaseActivity implements OnLabelListener, OnPho
     private PhotoView currentSelectedImage = null;
 
     @Override
-    public void onModifyLabel(BaseLabelView view, String text, int color, boolean hasStroke) {
-        currentSelectedText = view;
-        startActivityForResult(new Intent(this, TextEditorActivity.class)
-                .putExtra(TextEditorActivity.EXTRA_EDITOR_TEXT, text)
-                .putExtra(TextEditorActivity.EXTRA_EDITOR_COLOR, color)
-                .putExtra(TextEditorActivity.EXTRA_EDITOR_BORDER, hasStroke)
-                .putExtra(TextEditorActivity.EXTRA_EDITOR_TYPE, TextEditorActivity.TYPE_UPDATE), MODIFY_TEXT);
-    }
-
-    @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.dialog_exit_title)
@@ -275,18 +267,9 @@ public class MainActivity extends BaseActivity implements OnLabelListener, OnPho
                         }).show();
     }
 
-    @Override
-    public void onModifyPhoto(PhotoView view) {
-        currentSelectedImage = view;
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-        photoPickerIntent.setType("image/*");
-        startActivityForResult(photoPickerIntent, MODIFY_PHOTO);
-    }
 
     @Override
-    public void onPushToBottom(final PhotoView view) {
-        Rect rect = new Rect();
-        view.getGlobalVisibleRect(rect);
+    public void onPushToBottom(final View view) {
         int childCount = textPhotoPanel.getChildCount();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -294,6 +277,7 @@ public class MainActivity extends BaseActivity implements OnLabelListener, OnPho
             for (int i = 0; i < childCount; i++) {
                 View otherView = textPhotoPanel.getChildAt(i);
                 if (otherView != view) {
+                    Log.d("WTest", "otherView " + otherView);
                     addTranslateAnim(animatorList, otherView, view);
                 }
             }
@@ -334,25 +318,31 @@ public class MainActivity extends BaseActivity implements OnLabelListener, OnPho
         float xDis = (current.getWidth() * current.getScaleX() + otherView.getWidth() * otherView.getScaleX()) / 2 + extra;
         float yDis = (current.getHeight() * current.getScaleY() + otherView.getHeight() * otherView.getScaleY()) / 2 + extra;
 
-        if (Math.abs(current.getX() - otherView.getX()) >= xDis || Math.abs(current.getY() - otherView.getY()) >= yDis) {
+        float currentX = ((BaseComponent) current).getCenterX();
+        float currentY = ((BaseComponent) current).getCenterY();
+        float otherX = ((BaseComponent) otherView).getCenterX();
+        float otherY = ((BaseComponent) otherView).getCenterY();
+
+        if (Math.abs(currentX - otherX) >= xDis || Math.abs(currentY - otherY) >= yDis) {
             return;
         }
-        int xDir = otherView.getX() > current.getX() ? 1 : -1;
-        int yDir = otherView.getY() > current.getY() ? 1 : -1;
-        Log.d("WTest", "dir " + xDir + " " + yDir);
-        float newX = current.getX() + xDir * xDis;
-        float newY = current.getY() + yDir * yDis;
-        if (Math.abs(newX - current.getX()) > Math.abs(newY - current.getY())) {
-            newX = otherView.getX() + xDir * minOffset;
+        int xDir = otherX > currentX ? 1 : -1;
+        int yDir = otherY > currentY ? 1 : -1;
+        float newX = currentX + xDir * xDis;
+        float newY = currentY + yDir * yDis;
+        if (Math.abs(newX - currentX) > Math.abs(newY - currentY)) {
+            newX = otherX + xDir * minOffset;
         } else {
-            newY = otherView.getY() + yDir * minOffset;
+            newY = otherY + yDir * minOffset;
         }
+        newX = newX - otherView.getWidth() / 2;
+        newY = newY - otherView.getHeight() / 2;
         animators.add(ObjectAnimator.ofFloat(otherView, View.X, newX, otherView.getX()));
         animators.add(ObjectAnimator.ofFloat(otherView, View.Y, newY, otherView.getY()));
 
     }
 
-    private void pushToBottom(PhotoView view) {
+    private void pushToBottom(View view) {
         int childCount = textPhotoPanel.getChildCount();
 
         if (childCount > 0) {
@@ -364,7 +354,7 @@ public class MainActivity extends BaseActivity implements OnLabelListener, OnPho
     }
 
     @Override
-    public void onBringToFront(final PhotoView view) {
+    public void onBringToFront(final View view) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             AnimatorSet animationSet = new AnimatorSet();
             float currentScaleX = view.getScaleX();
@@ -399,7 +389,17 @@ public class MainActivity extends BaseActivity implements OnLabelListener, OnPho
 
     }
 
-    private void bringToFront(PhotoView view) {
+    @Override
+    public void onDuplicate(View view) {
+        if(!(view instanceof BaseComponent)){
+            return;
+        }
+        BaseComponent baseComponent = ((BaseComponent) view).duplicate();
+        baseComponent.setListener(this);
+        textPhotoPanel.addView((View) baseComponent,defaultParams);
+    }
+
+    private void bringToFront(View view) {
         int childCount = textPhotoPanel.getChildCount();
         if (childCount > 0) {
             if (textPhotoPanel.getChildAt(childCount - 1) != view) {
