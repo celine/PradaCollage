@@ -20,8 +20,8 @@ public class CollageUtils {
         return trans;
     }
 
-    public static int getNewPos(float x, int range){
-        return (int) (x + sRandom.nextInt(range) - range / 2);
+    public static int getNewPos(int range){
+        return sRandom.nextInt(range);
     }
 
     public static class ScrapTransform {

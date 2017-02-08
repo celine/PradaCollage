@@ -312,6 +312,7 @@ public class MainActivity extends BaseActivity implements GeneralListener,
         }
     }
 
+    //TODO:add compatibility check
     private void addTranslateAnim(List<Animator> animators, View otherView, View current) {
         float extra = 5;
         float minOffset = 30;
@@ -395,9 +396,9 @@ public class MainActivity extends BaseActivity implements GeneralListener,
             return;
         }
         BaseComponent baseComponent = ((BaseComponent) view).duplicate();
-        int x = textPhotoPanel.getWidth() / 2 - view.getWidth();
-        int y = textPhotoPanel.getHeight() / 2 - view.getHeight();
-        baseComponent.setXY(x, y);
+        int x = CollageUtils.getNewPos(textPhotoPanel.getWidth() - view.getWidth());
+        int y = CollageUtils.getNewPos(textPhotoPanel.getHeight() - view.getHeight());
+        baseComponent.setXY(x + view.getWidth() / 2, y + view.getHeight() / 2);
         baseComponent.setListener(this);
         textPhotoPanel.addView((View) baseComponent, defaultParams);
     }
