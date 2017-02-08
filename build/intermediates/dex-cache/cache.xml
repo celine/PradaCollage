@@ -30,12 +30,39 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="6eb9107eb34d2fe2b020662b7fbbec991dcba846">
+        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-24.2.0_ba74b6e981a21cc6da17ceae113df5ee3a655dab.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/24.2.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.3"
         sha1="820acba36fa86ab15cb3d472b654dedb495075fd">
         <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-gridlayout-v7-24.2.0_b35da784132e15b5c92d49d49ab9209236dcef06.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wenchihhsieh/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/library-2.4.0_ca75a635962a8aa61d236ace1ffc32e1e4cd0ed8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="f9b41622897665678d31d78e57a361cb0cebcb0d">
+        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-24.2.0_db1284a973c8338506c628d983b053c65529adb5.jar" />
     </item>
     <item
         is-multidex="false"
@@ -57,12 +84,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="beac40bcc8a320a896dd15f5109cfcaea5e1e0e3">
+        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-24.2.0_f09f3033cdcaec064b6e75dae33e07fc4cfadffe.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.3"
         sha1="c3c638be6e650b165ab9ae144857b64e82787fad">
         <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-24.2.0_ec46883b462065fd8b3fca4b2c7bf757bfe9ce38.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/design/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="23eb0d2998a782213b56168cbf23a0688b9111d9">
+        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-design-24.2.0_3517b62520b66efe00484983d86e4d53f1289832.jar" />
     </item>
     <item
         is-multidex="false"
@@ -75,6 +120,24 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="d8bd2268fdcbfd52c76ade65d9900cd8def93a44">
+        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-24.2.0_91a7eae362a3f857c82bd17d89b02a35a77a4f46.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="fcc945a86ebcbf527429acb8216ec7dae2c06417">
+        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-24.2.0_46491a97720f1660900d383e51c8016821d8bb79.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/wenchihhsieh/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/24.2.0/support-annotations-24.2.0.jar"
         jumboMode="false"
         optimize="true"
@@ -84,12 +147,39 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="032a4b53def5e2ceedfc2e793b126c0163cfa1dd">
+        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_4150c27999c03c3cd763fb5f3f4a67f817ecdaaf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wenchihhsieh/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_b9c7cd4c09b8259a68f2430043df22f5b2456c08.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.3"
         sha1="c755536e5a100d9c76c8ea0b72f76c018f7a9de2">
         <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-24.2.0_3a18c4a8a4231ef18bcd3222f08bace038ec179d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wenchihhsieh/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.6.1/86b122e640af09b0723e1fa44083c354ba6d9089/glide-3.6.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="86b122e640af09b0723e1fa44083c354ba6d9089">
+        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/glide-3.6.1_e1fcf2f027850be097556528451225f4b7d825d3.jar" />
     </item>
     <item
         is-multidex="false"
@@ -117,87 +207,6 @@
         revision="23.0.3"
         sha1="045be695d968dd707691cc55d23746dbf8cf569a">
         <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_9448fa0a444bd9bec513bd68b2dbaec6739776a0.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="6eb9107eb34d2fe2b020662b7fbbec991dcba846">
-        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-24.2.0_ba74b6e981a21cc6da17ceae113df5ee3a655dab.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="f9b41622897665678d31d78e57a361cb0cebcb0d">
-        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-24.2.0_db1284a973c8338506c628d983b053c65529adb5.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="beac40bcc8a320a896dd15f5109cfcaea5e1e0e3">
-        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-24.2.0_f09f3033cdcaec064b6e75dae33e07fc4cfadffe.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/design/24.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="23eb0d2998a782213b56168cbf23a0688b9111d9">
-        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-design-24.2.0_3517b62520b66efe00484983d86e4d53f1289832.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="d8bd2268fdcbfd52c76ade65d9900cd8def93a44">
-        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-24.2.0_91a7eae362a3f857c82bd17d89b02a35a77a4f46.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="fcc945a86ebcbf527429acb8216ec7dae2c06417">
-        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-24.2.0_46491a97720f1660900d383e51c8016821d8bb79.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/libs/internal_impl-24.2.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="032a4b53def5e2ceedfc2e793b126c0163cfa1dd">
-        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_4150c27999c03c3cd763fb5f3f4a67f817ecdaaf.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/wenchihhsieh/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
-        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_b9c7cd4c09b8259a68f2430043df22f5b2456c08.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/wenchihhsieh/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.6.1/86b122e640af09b0723e1fa44083c354ba6d9089/glide-3.6.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="86b122e640af09b0723e1fa44083c354ba6d9089">
-        <dex dex="/Users/wenchihhsieh/source/PradaCollage/app/build/intermediates/pre-dexed/debug/glide-3.6.1_e1fcf2f027850be097556528451225f4b7d825d3.jar" />
     </item>
 
 </items>

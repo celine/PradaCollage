@@ -178,7 +178,6 @@ public class LabelViewImpl extends BaseLabelView {
         labelView.setTextSize((int) mTextPaint.getTextSize());
         labelView.setTextColor(getTextColor());
         labelView.setText(mText);
-        labelView.setXY(CollageUtils.getNewPos(ViewCompat.getX(this),getWidth()), CollageUtils.getNewPos(ViewCompat.getY(this), getHeight()));
         ViewCompat.setScaleX(labelView, ViewCompat.getScaleX(this));
         ViewCompat.setScaleY(labelView, ViewCompat.getScaleY(this));
         ViewCompat.setRotation(labelView, ViewCompat.getRotation(this));

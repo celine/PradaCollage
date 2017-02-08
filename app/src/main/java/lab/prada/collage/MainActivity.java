@@ -1,8 +1,9 @@
 package lab.prada.collage;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.AnimatorSet;
+import com.nineoldandroids.animation.ObjectAnimator;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -126,7 +127,7 @@ public class MainActivity extends BaseActivity implements GeneralListener,
                             ViewCompat.setScaleX(iv, scale);
                             ViewCompat.setScaleY(iv, scale);
                             iv.setImageBitmap(bitmap);
-                            iv.setXY(transform.centerX-iv.getWidth()/2, transform.centerY-iv.getHeight()/2);
+                            iv.setXY(transform.centerX - iv.getWidth() / 2, transform.centerY - iv.getHeight() / 2);
                             textPhotoPanel.addView(iv);
                             return iv;
                         }
@@ -311,12 +312,11 @@ public class MainActivity extends BaseActivity implements GeneralListener,
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private void addTranslateAnim(List<Animator> animators, View otherView, View current) {
         float extra = 5;
         float minOffset = 30;
-        float xDis = (current.getWidth() * current.getScaleX() + otherView.getWidth() * otherView.getScaleX()) / 2 + extra;
-        float yDis = (current.getHeight() * current.getScaleY() + otherView.getHeight() * otherView.getScaleY()) / 2 + extra;
+        float xDis = (current.getWidth() * ViewCompat.getScaleX(current) + otherView.getWidth() * otherView.getScaleX()) / 2 + extra;
+        float yDis = (current.getHeight() * ViewCompat.getScaleY(current) + otherView.getHeight() * otherView.getScaleY()) / 2 + extra;
 
         float currentX = ((BaseComponent) current).getCenterX();
         float currentY = ((BaseComponent) current).getCenterY();
@@ -337,8 +337,8 @@ public class MainActivity extends BaseActivity implements GeneralListener,
         }
         newX = newX - otherView.getWidth() / 2;
         newY = newY - otherView.getHeight() / 2;
-        animators.add(ObjectAnimator.ofFloat(otherView, View.X, newX, otherView.getX()));
-        animators.add(ObjectAnimator.ofFloat(otherView, View.Y, newY, otherView.getY()));
+        animators.add(ObjectAnimator.ofFloat(otherView, "translationX", newX, ViewCompat.getX(otherView)));
+        animators.add(ObjectAnimator.ofFloat(otherView, "translationY", newY, ViewCompat.getY(otherView)));
 
     }
 
@@ -360,7 +360,7 @@ public class MainActivity extends BaseActivity implements GeneralListener,
             float currentScaleX = view.getScaleX();
             float currentScaleY = view.getScaleY();
             float toScale = currentScaleX * 1.2f;
-            animationSet.playTogether(ObjectAnimator.ofFloat(view, View.SCALE_X, toScale, currentScaleX), ObjectAnimator.ofFloat(view, View.SCALE_Y, toScale, currentScaleY));
+            animationSet.playTogether(ObjectAnimator.ofFloat(view, "scaleX", toScale, currentScaleX), ObjectAnimator.ofFloat(view, "scaleY", toScale, currentScaleY));
             animationSet.setDuration(500);
             animationSet.setInterpolator(new OvershootInterpolator());
             animationSet.addListener(new Animator.AnimatorListener() {
@@ -391,12 +391,15 @@ public class MainActivity extends BaseActivity implements GeneralListener,
 
     @Override
     public void onDuplicate(View view) {
-        if(!(view instanceof BaseComponent)){
+        if (!(view instanceof BaseComponent)) {
             return;
         }
         BaseComponent baseComponent = ((BaseComponent) view).duplicate();
+        int x = textPhotoPanel.getWidth() / 2 - view.getWidth();
+        int y = textPhotoPanel.getHeight() / 2 - view.getHeight();
+        baseComponent.setXY(x, y);
         baseComponent.setListener(this);
-        textPhotoPanel.addView((View) baseComponent,defaultParams);
+        textPhotoPanel.addView((View) baseComponent, defaultParams);
     }
 
     private void bringToFront(View view) {

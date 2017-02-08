@@ -25,13 +25,6 @@ public class PhotoView extends ImageView implements BaseComponent {
         draw(canvas);
         PhotoView newPhotoView = new PhotoView(getContext());
         newPhotoView.setImageBitmap(bitmap);
-        Log.d("WTest", " width " + getWidth() + " " + getHeight());
-
-        Log.d("WTest", "bitmap width " + bitmap.getWidth() + " " + bitmap.getHeight());
-        Log.d("WTest", " newPhotoView width " + newPhotoView.getWidth() + " " + newPhotoView.getHeight());
-
-        Log.d("WTest", "after scale " + ViewCompat.getScaleX(this) + " " + ViewCompat.getScaleY(this));
-        newPhotoView.setXY(CollageUtils.getNewPos(ViewCompat.getX(this), getWidth()), CollageUtils.getNewPos(ViewCompat.getY(this), getHeight()));
         ViewCompat.setScaleX(newPhotoView, ViewCompat.getScaleX(this));
         ViewCompat.setScaleY(newPhotoView, ViewCompat.getScaleY(this));
         ViewCompat.setRotation(newPhotoView, ViewCompat.getRotation(this));
