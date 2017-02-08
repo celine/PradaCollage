@@ -12,5 +12,6 @@
     <string name="progress_message">Please wait a moment</string>
     <string name="has_stroke">Has Stroke</string>
     <string name="user_denied">User denied</string>
+    <string name="user_denied_settings">User denied read photos permissions, please go to settings to enable it.</string>
 
 </resources>

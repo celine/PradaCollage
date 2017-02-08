@@ -64,7 +64,9 @@ public class MultipleImagePickerActivity extends BaseActivity implements LoaderM
         listView.setAdapter(mAdapter);
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-
+                //TODO: add a dialog to go to settings
+                Toast.makeText(getBaseContext(), R.string.user_denied_settings, Toast.LENGTH_SHORT).show();
+                finish();
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_READ_EXTERNAL_PERMISSION);
             }
