@@ -21,6 +21,7 @@ import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -102,10 +103,12 @@ public class MainActivity extends BaseActivity implements GeneralListener,
                 }
                 int width = getResources().getDisplayMetrics().widthPixels;
                 int height = getResources().getDisplayMetrics().heightPixels;
-                List<CollageUtils.ScrapTransform> trans = CollageUtils.generateScrapsTransform(width, height, paths.size());
+                Log.d("WTest", "width " + width + " height " + height);
+                final List<CollageUtils.ScrapTransform> trans = CollageUtils.generateScrapsTransform(width, height, paths.size());
+
                 clearImages();
                 int i = 0;
-                final int baseWidth = textPhotoPanel.getWidth() / 2;
+                final int baseWidth = width / 2;
                 for (CollageUtils.ScrapTransform t : trans) {
                     final String path = paths.get(i++);
                     final CollageUtils.ScrapTransform transform = t;
@@ -128,7 +131,7 @@ public class MainActivity extends BaseActivity implements GeneralListener,
                             ViewCompat.setScaleY(iv, scale);
                             iv.setImageBitmap(bitmap);
                             iv.setXY(transform.centerX - iv.getWidth() / 2, transform.centerY - iv.getHeight() / 2);
-                            textPhotoPanel.addView(iv,defaultParams);
+                            textPhotoPanel.addView(iv, defaultParams);
                             return iv;
                         }
                     }, Task.UI_THREAD_EXECUTOR);
@@ -193,9 +196,11 @@ public class MainActivity extends BaseActivity implements GeneralListener,
     private void addTextView(String text, int color, boolean hasStroke) {
         BaseLabelView tv = ComponentFactory.create(ComponentFactory.COMPONENT_LABEL, this, textPhotoPanel);
         tv.setListener(this);
-        tv.setXY(textPhotoPanel.getWidth() / 2, textPhotoPanel.getHeight() / 2);
+        int width = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels;
+        tv.setXY(width / 2, height / 2);
         tv.setText(text, color, hasStroke);
-        textPhotoPanel.addView(tv.getView(),defaultParams);
+        textPhotoPanel.addView(tv.getView(), defaultParams);
     }
 
     @Override
@@ -349,7 +354,7 @@ public class MainActivity extends BaseActivity implements GeneralListener,
         if (childCount > 0) {
             if (textPhotoPanel.getChildAt(0) != view) {
                 textPhotoPanel.removeView(view);
-                textPhotoPanel.addView(view, 0,defaultParams);
+                textPhotoPanel.addView(view, 0, defaultParams);
             }
         }
     }
@@ -396,8 +401,11 @@ public class MainActivity extends BaseActivity implements GeneralListener,
             return;
         }
         BaseComponent baseComponent = ((BaseComponent) view).duplicate();
-        int x = CollageUtils.getNewPos(textPhotoPanel.getWidth() - view.getWidth());
-        int y = CollageUtils.getNewPos(textPhotoPanel.getHeight() - view.getHeight());
+        int width = textPhotoPanel.getWidth();
+        int height = textPhotoPanel.getHeight();
+        DisplayMetrics matrix = getResources().getDisplayMetrics();
+        int x = CollageUtils.getNewPos(width == 0 ? matrix.widthPixels : width) - view.getWidth();
+        int y = CollageUtils.getNewPos(height == 0 ? matrix.heightPixels : height) - view.getHeight();
         baseComponent.setXY(x + view.getWidth() / 2, y + view.getHeight() / 2);
         baseComponent.setListener(this);
         textPhotoPanel.addView((View) baseComponent, defaultParams);
@@ -408,7 +416,7 @@ public class MainActivity extends BaseActivity implements GeneralListener,
         if (childCount > 0) {
             if (textPhotoPanel.getChildAt(childCount - 1) != view) {
                 textPhotoPanel.removeView(view);
-                textPhotoPanel.addView(view,defaultParams);
+                textPhotoPanel.addView(view, defaultParams);
             }
         }
     }
