@@ -128,7 +128,7 @@ public class MainActivity extends BaseActivity implements GeneralListener,
                             ViewCompat.setScaleY(iv, scale);
                             iv.setImageBitmap(bitmap);
                             iv.setXY(transform.centerX - iv.getWidth() / 2, transform.centerY - iv.getHeight() / 2);
-                            textPhotoPanel.addView(iv);
+                            textPhotoPanel.addView(iv,defaultParams);
                             return iv;
                         }
                     }, Task.UI_THREAD_EXECUTOR);
@@ -195,7 +195,7 @@ public class MainActivity extends BaseActivity implements GeneralListener,
         tv.setListener(this);
         tv.setXY(textPhotoPanel.getWidth() / 2, textPhotoPanel.getHeight() / 2);
         tv.setText(text, color, hasStroke);
-        textPhotoPanel.addView(tv.getView());
+        textPhotoPanel.addView(tv.getView(),defaultParams);
     }
 
     @Override
@@ -349,7 +349,7 @@ public class MainActivity extends BaseActivity implements GeneralListener,
         if (childCount > 0) {
             if (textPhotoPanel.getChildAt(0) != view) {
                 textPhotoPanel.removeView(view);
-                textPhotoPanel.addView(view, 0);
+                textPhotoPanel.addView(view, 0,defaultParams);
             }
         }
     }
@@ -408,7 +408,7 @@ public class MainActivity extends BaseActivity implements GeneralListener,
         if (childCount > 0) {
             if (textPhotoPanel.getChildAt(childCount - 1) != view) {
                 textPhotoPanel.removeView(view);
-                textPhotoPanel.addView(view);
+                textPhotoPanel.addView(view,defaultParams);
             }
         }
     }
